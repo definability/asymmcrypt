@@ -111,7 +111,7 @@ class GeneratorLFSR(Generator):
     register_mask = 0
 
     def __init__(self,name,seed):
-        super(GeneratorLFSR, self).__init__('LFSR', seed)
+        super(GeneratorLFSR, self).__init__(name, seed)
 
     def plant_a_seed(self, seed):
         super(GeneratorLFSR, self).plant_a_seed(seed)

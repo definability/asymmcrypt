@@ -1,37 +1,48 @@
 from generators import *
+from primitive_testing import primitive_test_wrapper
+from probability_testing import probability_test_wrapper
+from independence_testing import independence_test_wrapper
+import os
 import time
 
 if __name__ == '__main__':
-    #seed = dict()
-    #SEEDS
-    # Default and LFSRs
-    #seed = 1
-    # Lemer
-    #seed = {'x':0, 'm':LEMER_M, 'c':LEMER_C, 'a':LEMER_A} # Lemer
-    # Geffe
-    #seed = {'LFSRs': [GeneratorL89(1), GeneratorL89(2**18), GeneratorL20(1)]}
-    # BBS
-    #seed = {'r': 2, 'p': BBS_P, 'q': BBS_Q}
-    # Librarian
-    with open('kant.txt', 'r') as f:
-        seed = {'text': f.read()}
-    #g = GeneratorDefault(seed)
-    #g = GeneratorLemer(seed)
-    #g = GeneratorL20(seed)
-    #g = GeneratorL89(seed)
-    #g = GeneratorGeffe(seed)
-    #g = GeneratorBBS(seed)
-    g = GeneratorLibrarian(seed)
-    current_value = 0
-    frequencies = [0] * 256
-    i = 0
-    while i < 2**20 - 1:
-        #print "Generator %s says 0x%X!"%(g.get_name(), g.get_byte())
-        current_value = g.get_byte()
-        frequencies[current_value] += 1
-        #print current_value,
-        i += 1
+    '''
+    Asymmetric Cryptography: Lab 1
+    '''
 
-    for f in frequencies:
-        #print int((2**20-1.0)/256 - f),
-        print f,
+    """
+    Seeds initialization
+    """
+    seed = 1
+    seed_Lemer = {'x': 0, 'm': LEMER_M, 'c': LEMER_C, 'a': LEMER_A}
+    seed_Geffe = {
+            'LFSRs': [GeneratorL89(1), GeneratorL89(2**18), GeneratorL20(1)]
+            }
+    seed_BBS = {'r': 2, 'p': BBS_P, 'q': BBS_Q}
+    seed_Librarian = None
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+            'kant.txt'), 'r') as f:
+        seed_Librarian = {'text': f.read()}
+    """
+    Generators initialization
+    """
+    generators = [
+            GeneratorDefault(seed),
+            GeneratorLemer(seed_Lemer),
+            GeneratorL20(seed),
+            GeneratorL89(seed),
+            GeneratorGeffe(seed_Geffe),
+            GeneratorBBS(seed_BBS),
+            GeneratorLibrarian(seed_Librarian)
+            ]
+    """
+    Generators testing
+    """
+    m = 2**20
+
+    #print 'PRIMITIVE TESTING'
+    #primitive_test_wrapper(generators, m)
+    #print 'PROBABILITY TESTING'
+    #probability_test_wrapper(generators, m)
+    print 'INDEPENDENCE TESTING'
+    independence_test_wrapper(generators, m)
