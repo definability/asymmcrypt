@@ -200,3 +200,25 @@ class GeneratorBBS(Generator):
 
     def get_byte(self):
         return self.get_block(BYTE_MASK)
+
+class GeneratorLibrarian(Generator):
+    text = ''
+    text_length = 0
+    current_letter = -1
+
+    def __init__(self,seed):
+        super(GeneratorLibrarian, self).__init__('Librarian', seed)
+
+    def plant_a_seed(self,seed):
+        super(GeneratorLibrarian, self).plant_a_seed(seed)
+        self.text = self.seed['text']
+        self.current_letter = -1
+        self.text_length = len(self.text)
+
+    def get_byte(self):
+        self.current_letter += 1
+        if self.current_letter < self.text_length:
+            return ord(self.text[self.current_letter]) & BYTE_MASK
+        else:
+            self.current_letter = -1
+            return self.get_byte()
