@@ -44,5 +44,5 @@ if __name__ == '__main__':
     #primitive_test_wrapper(generators, m)
     #print 'PROBABILITY TESTING'
     #probability_test_wrapper(generators, m)
-    print 'INDEPENDENCE TESTING'
-    independence_test_wrapper(generators, m)
+    #print 'INDEPENDENCE TESTING'
+    #independence_test_wrapper(generators, m)

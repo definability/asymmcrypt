@@ -20,8 +20,3 @@ def independence_test(generator, count):
 
 def independence_test_wrapper(generators, count):
     chi2_test_wrapper(generators, count, 255**2, independence_test)
-    '''
-    for generator in generators:
-        print independence_test(generator, count)
-        print 'Quantile:', calculate_chi2_critical(0.99, 255**2)
-    '''

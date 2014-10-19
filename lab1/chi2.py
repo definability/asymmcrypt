@@ -17,16 +17,6 @@ def calculate_chi2_advanced(nu_matrix, a, b):
     for i in range(rows_number):
         for j in range(columns_number):
             n += nu_matrix[i][j]
-    '''
-    nu_rows = [0] * rows_number
-    nu_columns = [0] * columns_number
-    for i in range(rows_number):
-        for j in range(columns_number):
-            nu_rows[i] += nu_matrix[i][j]
-            nu_columns[j] += nu_matrix[i][j]
-            n += nu_matrix[i][j]
-            nu_matrix[i][j] **= 2
-    '''
 
     result = -1.0
     for i in range(rows_number):
