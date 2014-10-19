@@ -17,6 +17,9 @@ L89_MASK = (1 << 37) | (1 << 88)
 
 
 def calculate_bits(number):
+    '''
+    Got from https://wiki.python.org/moin/BitManipulation
+    '''
     counter = 0
     while number:
         number &= number - 1
