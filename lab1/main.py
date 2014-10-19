@@ -11,13 +11,17 @@ if __name__ == '__main__':
     # Geffe
     #seed = {'LFSRs': [GeneratorL89(1), GeneratorL89(2**18), GeneratorL20(1)]}
     # BBS
-    seed = {'r': 2, 'p': BBS_P, 'q': BBS_Q}
+    #seed = {'r': 2, 'p': BBS_P, 'q': BBS_Q}
+    # Librarian
+    with open('kant.txt', 'r') as f:
+        seed = {'text': f.read()}
     #g = GeneratorDefault(seed)
     #g = GeneratorLemer(seed)
     #g = GeneratorL20(seed)
     #g = GeneratorL89(seed)
     #g = GeneratorGeffe(seed)
-    g = GeneratorBBS(seed)
+    #g = GeneratorBBS(seed)
+    g = GeneratorLibrarian(seed)
     current_value = 0
     frequencies = [0] * 256
     i = 0
@@ -29,4 +33,5 @@ if __name__ == '__main__':
         i += 1
 
     for f in frequencies:
-        print int((2**20-1.0)/256 - f),
+        #print int((2**20-1.0)/256 - f),
+        print f,
