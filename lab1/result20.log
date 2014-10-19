@@ -106,3 +106,45 @@ This value does not fit the 0.10 significance level (theoretical value is 65487.
 This value does not fit the 0.05 significance level (theoretical value is 65618.19)
 This value does not fit the 0.01 significance level (theoretical value is 65863.92)
 
+INTERVALS TESTING
+Testing generator Default...
+I've got Chi squared as 5059.60
+This value fits the 0.10 significance level (theoretical value is 5229.44)
+This value fits the 0.05 significance level (theoretical value is 5266.13)
+This value fits the 0.01 significance level (theoretical value is 5334.94)
+
+Testing generator Lemer...
+I've got Chi squared as 1.23
+This value fits the 0.10 significance level (theoretical value is 5229.44)
+This value fits the 0.05 significance level (theoretical value is 5266.13)
+This value fits the 0.01 significance level (theoretical value is 5334.94)
+
+Testing generator L20...
+I've got Chi squared as 5108.18
+This value fits the 0.10 significance level (theoretical value is 5229.44)
+This value fits the 0.05 significance level (theoretical value is 5266.13)
+This value fits the 0.01 significance level (theoretical value is 5334.94)
+
+Testing generator L89...
+I've got Chi squared as 6684.49
+This value does not fit the 0.10 significance level (theoretical value is 5229.44)
+This value does not fit the 0.05 significance level (theoretical value is 5266.13)
+This value does not fit the 0.01 significance level (theoretical value is 5334.94)
+
+Testing generator Geffee...
+I've got Chi squared as 5508.13
+This value does not fit the 0.10 significance level (theoretical value is 5229.44)
+This value does not fit the 0.05 significance level (theoretical value is 5266.13)
+This value does not fit the 0.01 significance level (theoretical value is 5334.94)
+
+Testing generator BBS...
+I've got Chi squared as 5140.04
+This value fits the 0.10 significance level (theoretical value is 5229.44)
+This value fits the 0.05 significance level (theoretical value is 5266.13)
+This value fits the 0.01 significance level (theoretical value is 5334.94)
+
+Testing generator Librarian...
+I've got Chi squared as 11989.10
+This value does not fit the 0.10 significance level (theoretical value is 5229.44)
+This value does not fit the 0.05 significance level (theoretical value is 5266.13)
+This value does not fit the 0.01 significance level (theoretical value is 5334.94)

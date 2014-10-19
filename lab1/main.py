@@ -2,6 +2,7 @@ from generators import *
 from primitive_testing import primitive_test_wrapper
 from probability_testing import probability_test_wrapper
 from independence_testing import independence_test_wrapper
+from intervals_testing import intervals_test_wrapper
 import os
 import time
 
@@ -46,3 +47,6 @@ if __name__ == '__main__':
     #probability_test_wrapper(generators, m)
     #print 'INDEPENDENCE TESTING'
     #independence_test_wrapper(generators, m)
+    #print 'INTERVALS TESTING'
+    #intervals_test_wrapper(generators, m)
+    print 'END OF TESTS'

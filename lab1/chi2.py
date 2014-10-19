@@ -13,7 +13,8 @@ def calculate_chi2(nu_list, m):
 
 def calculate_chi2_advanced(nu_matrix, a, b):
     n = 0
-    columns_number = rows_number = len(nu_matrix)
+    rows_number = len(nu_matrix)
+    columns_number = len(nu_matrix[0])
     for i in range(rows_number):
         for j in range(columns_number):
             n += nu_matrix[i][j]
