@@ -26,6 +26,16 @@ def calculate_bits(number):
         counter += 1
     return counter
 
+def polynomial_to_mask(koeffs):
+    result = dict()
+    koeffs = list(set(koeffs))
+    koeffs.sort(reverse=True)
+    result['register_size'] = koeffs[0]
+    result['mask'] = reduce(
+            lambda result, x: result | (1<<(result['register_size']-x-1)),
+            koeffs[1:], 0)
+    return result
+
 
 class Generator(object):
     #seed = None
@@ -241,8 +251,5 @@ class GeneratorLibrarian(Generator):
 
     def get_byte(self):
         self.current_letter += 1
-        if self.current_letter < self.text_length:
-            return ord(self.text[self.current_letter]) & BYTE_MASK
-        else:
-            self.current_letter = -1
-            return self.get_byte()
+        #if self.current_letter < self.text_length:
+        return ord(self.text[self.current_letter]) & BYTE_MASK

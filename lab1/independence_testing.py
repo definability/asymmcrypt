@@ -8,6 +8,7 @@ def independence_test(generator, count):
     frequencies = list()
     frequencies_1 = [0] * (2**8)
     frequencies_2 = [0] * (2**8)
+    n = count/2
     for i in range(2**8):
         frequencies.append([0] * (2**8))
     for i in range(n):
@@ -15,7 +16,7 @@ def independence_test(generator, count):
         frequencies[numbers[0]][numbers[1]] += 1
         frequencies_1[numbers[0]] += 1
         frequencies_2[numbers[1]] += 1
-    chi2 = calculate_chi2_advanced(frequencies, frequencies_1, frequencies_2)
+    chi2 = calculate_chi2_advanced(frequencies, frequencies_1, frequencies_2, n)
     return chi2
 
 def independence_test_wrapper(generators, count):

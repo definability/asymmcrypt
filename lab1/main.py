@@ -17,12 +17,21 @@ if __name__ == '__main__':
     seed = 1
     seed_Lemer = {'x': 0, 'm': LEMER_M, 'c': LEMER_C, 'a': LEMER_A}
     seed_Geffe = {
-            'LFSRs': [GeneratorL20(1), GeneratorL20(2**10), GeneratorL20(2**17)]
+            #'LFSRs': [GeneratorL20(1), GeneratorL20(2**10), GeneratorL20(2**17)]
+            'LFSRs': [GeneratorLFSR('L1',
+                {'x':1<<10, 'register_size': 11, 'mask': (1<<8) | (1<<10)}),
+                GeneratorLFSR('L2',
+                {'x':1<<8, 'register_size': 9, 'mask':
+                    (1<<4) | (1<<5) | (1<<7) | (1<<8)}),
+                GeneratorLFSR('L3',
+                {'x':1<<7, 'register_size': 10, 'mask': (1<<6) | (1<<9)})
+                ]
+
             }
     seed_BBS = {'r': 2, 'p': BBS_P, 'q': BBS_Q}
     seed_Librarian = None
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-            'kant.txt'), 'r') as f:
+            'file.txt'), 'r') as f:
         seed_Librarian = {'text': f.read()}
     """
     Generators initialization

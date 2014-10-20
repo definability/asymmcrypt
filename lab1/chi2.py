@@ -11,21 +11,20 @@ def calculate_chi2(nu_list, m):
         result += ((nu - n)**2) / n
     return result
 
-def calculate_chi2_advanced(nu_matrix, a, b):
-    n = 0
+def calculate_chi2_advanced(nu_matrix, a, b, n=0):
     rows_number = len(nu_matrix)
     columns_number = len(nu_matrix[0])
-    for i in range(rows_number):
-        for j in range(columns_number):
-            n += nu_matrix[i][j]
+    if n is 0:
+        for i in range(rows_number):
+            for j in range(columns_number):
+                n += nu_matrix[i][j]
 
     result = -1.0
     for i in range(rows_number):
         for j in range(columns_number):
             if a[i] > 0 and b[j] > 0:
+                cur = (nu_matrix[i][j]**2.0) / (a[i] * b[j])
                 result += (nu_matrix[i][j]**2.0) / (a[i] * b[j])
-            else:
-                result += 1.0
     result *= n
 
     return result

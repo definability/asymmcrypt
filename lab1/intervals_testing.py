@@ -11,6 +11,7 @@ def intervals_test(generator, count, r=0):
     frequencies = list()
     frequencies_1 = [0] * (2**8)
     intervals = [count/r] * r
+    n = count - (count % r)
     for i in range(2**8):
         frequencies.append([0] * r)
 
