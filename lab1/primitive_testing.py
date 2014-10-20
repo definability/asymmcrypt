@@ -10,7 +10,6 @@ def yield_frequencies(generator, count):
         yield f
 
 def primitive_test_wrapper(generators, count):
-    g = generators[1]
     for generator in generators:
         print "Testing generator %s..." % generator.get_name()
         for f in yield_frequencies(generator, count):

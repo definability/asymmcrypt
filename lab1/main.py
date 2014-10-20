@@ -17,7 +17,7 @@ if __name__ == '__main__':
     seed = 1
     seed_Lemer = {'x': 0, 'm': LEMER_M, 'c': LEMER_C, 'a': LEMER_A}
     seed_Geffe = {
-            'LFSRs': [GeneratorL89(1), GeneratorL89(2**18), GeneratorL20(1)]
+            'LFSRs': [GeneratorL20(1), GeneratorL20(2**10), GeneratorL20(2**17)]
             }
     seed_BBS = {'r': 2, 'p': BBS_P, 'q': BBS_Q}
     seed_Librarian = None
@@ -30,10 +30,12 @@ if __name__ == '__main__':
     generators = [
             GeneratorDefault(seed),
             GeneratorLemer(seed_Lemer),
+            GeneratorLemerLast(seed_Lemer),
             GeneratorL20(seed),
             GeneratorL89(seed),
             GeneratorGeffe(seed_Geffe),
             GeneratorBBS(seed_BBS),
+            GeneratorBBSBits(seed_BBS),
             GeneratorLibrarian(seed_Librarian)
             ]
     """
@@ -41,12 +43,12 @@ if __name__ == '__main__':
     """
     m = 2**20
 
-    #print 'PRIMITIVE TESTING'
-    #primitive_test_wrapper(generators, m)
-    #print 'PROBABILITY TESTING'
-    #probability_test_wrapper(generators, m)
-    #print 'INDEPENDENCE TESTING'
-    #independence_test_wrapper(generators, m)
-    #print 'INTERVALS TESTING'
-    #intervals_test_wrapper(generators, m)
+    print 'PRIMITIVE TESTING'
+    primitive_test_wrapper(generators, m)
+    print 'PROBABILITY TESTING'
+    probability_test_wrapper(generators, m)
+    print 'INDEPENDENCE TESTING'
+    independence_test_wrapper(generators, m)
+    print 'INTERVALS TESTING'
+    intervals_test_wrapper(generators, m)
     print 'END OF TESTS'

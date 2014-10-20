@@ -67,7 +67,7 @@ class GeneratorLemer(Generator):
     c = 0
 
     def __init__(self,seed):
-        super(GeneratorLemer, self).__init__('Lemer', seed)
+        super(GeneratorLemer, self).__init__('Lemer (first byte)', seed)
 
     def plant_a_seed(self, seed):
         super(GeneratorLemer, self).plant_a_seed(seed)
@@ -81,6 +81,10 @@ class GeneratorLemer(Generator):
         for i in range(self.FIRST_BLOCK, self.LAST_BLOCK):
             self.get_byte()
         '''
+
+    def get_value(self):
+        self.x_n = (self.a * self.x_n + self.c) % self.m 
+        return self.x_n
 
     def get_byte(self):
         '''
@@ -98,8 +102,15 @@ class GeneratorLemer(Generator):
             return self.get_byte()
         '''
         # And this is not
-        self.x_n = (self.a * self.x_n + self.c) % self.m 
-        return self.x_n & self.BLOCK_MASK
+        return self.get_value() & self.BLOCK_MASK
+
+
+class GeneratorLemerLast(GeneratorLemer):
+    def __init__(self,seed):
+        super(GeneratorLemer, self).__init__('Lemer (Last byte)', seed)
+    def get_byte(self):
+        return (self.get_value() >> (self.LAST_BLOCK * self.BITS_IN_BLOCK)) &\
+            self.BLOCK_MASK
 
 
 class GeneratorLFSR(Generator):
@@ -183,7 +194,7 @@ class GeneratorBBS(Generator):
     n = 1
     current_r = 2
     def __init__(self,seed):
-        super(GeneratorBBS, self).__init__('BBS', seed)
+        super(GeneratorBBS, self).__init__('BBS (last byte)', seed)
 
     def plant_a_seed(self,seed):
         super(GeneratorBBS, self).plant_a_seed(seed)
@@ -200,6 +211,19 @@ class GeneratorBBS(Generator):
 
     def get_byte(self):
         return self.get_block(BYTE_MASK)
+
+class GeneratorBBSBits(GeneratorBBS):
+    BITS_IN_BYTE = 8
+    def __init__(self,seed):
+        super(GeneratorBBS, self).__init__('BBS (last bit)', seed)
+    def get_byte(self):
+        result = 0
+        for i in range(self.BITS_IN_BYTE):
+            current_bit = self.get_bit()
+            result <<= 1
+            result |= current_bit
+
+        return result
 
 class GeneratorLibrarian(Generator):
     text = ''
