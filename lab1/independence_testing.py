@@ -13,6 +13,7 @@ def independence_test(generator, count):
         frequencies.append([0] * (2**8))
     for i in range(n):
         numbers = (generator.get_byte(), generator.get_byte())
+        #numbers = (generator[2*i], generator[2*i+1])
         frequencies[numbers[0]][numbers[1]] += 1
         frequencies_1[numbers[0]] += 1
         frequencies_2[numbers[1]] += 1

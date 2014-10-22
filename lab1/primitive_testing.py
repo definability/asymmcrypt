@@ -2,6 +2,7 @@ def calculate_frequencies(generator, count):
     frequencies = [0] * 256
     for i in range(count):
         frequencies[generator.get_byte()] += 1
+        #frequencies[generator[i]] += 1
     return frequencies
 
 def yield_frequencies(generator, count):

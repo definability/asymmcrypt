@@ -64,6 +64,28 @@ class GeneratorDefault(Generator):
     def get_byte(self):
         return random.getrandbits(8)
 
+    def reset(self):
+        return 0
+
+
+class GeneratorSequence(Generator):
+    current_element = -1
+
+    def __init__(self, name, seed):
+        super(GeneratorSequence, self).__init__(name, seed)
+
+    def plant_a_seed(self, seed):
+        super(GeneratorSequence, self).plant_a_seed(seed)
+        self.current_element = -1
+        self.sequence = seed
+
+    def get_byte(self):
+        self.current_element += 1
+        return self.sequence[self.current_element]
+
+    def reset(self):
+        self.current_element = -1
+
 
 class GeneratorLemer(Generator):
     FIRST_BLOCK = 0
@@ -117,7 +139,7 @@ class GeneratorLemer(Generator):
 
 class GeneratorLemerLast(GeneratorLemer):
     def __init__(self,seed):
-        super(GeneratorLemer, self).__init__('Lemer (Last byte)', seed)
+        super(GeneratorLemer, self).__init__('Lemer (last byte)', seed)
     def get_byte(self):
         return (self.get_value() >> (self.LAST_BLOCK * self.BITS_IN_BLOCK)) &\
             self.BLOCK_MASK

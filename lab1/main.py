@@ -4,6 +4,7 @@ from probability_testing import probability_test_wrapper
 from independence_testing import independence_test_wrapper
 from intervals_testing import intervals_test_wrapper
 import os
+from sys import stdout
 import time
 
 if __name__ == '__main__':
@@ -31,7 +32,7 @@ if __name__ == '__main__':
     seed_BBS = {'r': 2, 'p': BBS_P, 'q': BBS_Q}
     seed_Librarian = None
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-            'file.txt'), 'r') as f:
+            'kant_end.txt'), 'r') as f:
         seed_Librarian = {'text': f.read()}
     """
     Generators initialization
@@ -47,11 +48,48 @@ if __name__ == '__main__':
             GeneratorBBSBits(seed_BBS),
             GeneratorLibrarian(seed_Librarian)
             ]
+    '''
+    generators = [
+            GeneratorLibrarian(seed_Librarian)
+            ]
+    '''
     """
     Generators testing
     """
     m = 2**20
+    sequential_generators = list()
+    for generator in generators:
+        print "Generating sequence from generator %s:"%generator.get_name()
 
+        print '[',
+        bar_interval_length = m/(2**5)
+        sequence = list()
+        for i in range(m):
+            if i % bar_interval_length == 0:
+                #stdout.write('.')
+                #stdout.flush()
+                print '*',
+            sequence.append(generator.get_byte())
+        print ']'
+
+        sequential_generators.append(
+                GeneratorSequence(generator.get_name(), sequence))
+
+    print 'PRIMITIVE TESTING'
+    primitive_test_wrapper(sequential_generators, m)
+    [sg.reset() for sg in sequential_generators]
+    print 'PROBABILITY TESTING'
+    probability_test_wrapper(sequential_generators, m)
+    [sg.reset() for sg in sequential_generators]
+    print 'INDEPENDENCE TESTING'
+    independence_test_wrapper(sequential_generators, m)
+    [sg.reset() for sg in sequential_generators]
+    print 'INTERVALS TESTING'
+    intervals_test_wrapper(sequential_generators, m)
+    [sg.reset() for sg in sequential_generators]
+    print 'END OF TESTS'
+
+    '''
     print 'PRIMITIVE TESTING'
     primitive_test_wrapper(generators, m)
     print 'PROBABILITY TESTING'
@@ -61,3 +99,9 @@ if __name__ == '__main__':
     print 'INTERVALS TESTING'
     intervals_test_wrapper(generators, m)
     print 'END OF TESTS'
+    '''
+    '''
+    print 'INTERVALS TESTING'
+    intervals_test_wrapper(generators, m)
+    print 'END OF TESTS'
+    '''

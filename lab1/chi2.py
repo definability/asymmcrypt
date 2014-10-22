@@ -23,7 +23,6 @@ def calculate_chi2_advanced(nu_matrix, a, b, n=0):
     for i in range(rows_number):
         for j in range(columns_number):
             if a[i] > 0 and b[j] > 0:
-                cur = (nu_matrix[i][j]**2.0) / (a[i] * b[j])
                 result += (nu_matrix[i][j]**2.0) / (a[i] * b[j])
     result *= n
 

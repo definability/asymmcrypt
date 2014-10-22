@@ -12,18 +12,24 @@ def intervals_test(generator, count, r=0):
     frequencies_1 = [0] * (2**8)
     intervals = [count/r] * r
     n = count - (count % r)
-    for i in range(2**8):
-        frequencies.append([0] * r)
+    #for i in range(2**8):
+    #    frequencies.append([0] * r)
+    for i in range(r):
+        frequencies.append([0] * 2**8)
 
     for i in range(r):
         for j in range(intervals[i]):
             value = generator.get_byte()
-            frequencies[value][i] += 1
+            #value = generator[i*r+j]
+            #frequencies[value][i] += 1
+            frequencies[i][value] += 1
             frequencies_1[value] += 1
-    chi2 = calculate_chi2_advanced(frequencies, frequencies_1, intervals)
+    #chi2 = calculate_chi2_advanced(frequencies, frequencies_1, intervals)
+    chi2 = calculate_chi2_advanced(frequencies, intervals, frequencies_1)
     return chi2
 
 def intervals_test_wrapper(generators, count):
     r = 1 + int(log(count)/log(2))
+    #r = 2
     chi2_test_wrapper(generators, count, 255*(r-1), lambda generators, count:
             intervals_test(generators, count, r))
