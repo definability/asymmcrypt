@@ -15,7 +15,9 @@ if __name__ == '__main__':
     """
     Seeds initialization
     """
-    seed = 1
+    seed = 277337516032933210144336547L
+    # 820564509333519643957583301L
+    # 400377124624244786222980632L
     seed_Lemer = {'x': 0, 'm': LEMER_M, 'c': LEMER_C, 'a': LEMER_A}
     seed_Geffe = {
             #'LFSRs': [GeneratorL20(1), GeneratorL20(2**10), GeneratorL20(2**17)]
