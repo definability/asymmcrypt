@@ -6,8 +6,8 @@ from sys import argv
 def print_usage(programname):
     print """
 USAGE:
-{programname} --sqr t         - Get y = (t*t) mod n
-{programname} --gcd-crack t z - Get p = gcd(t+z, n)
+{programname} -1     - Get t and y = (t*t) mod n
+{programname} -2 t z - Try to crack
 """.format(programname = programname)
 
 if __name__ == '__main__':
@@ -38,28 +38,7 @@ if __name__ == '__main__':
             print "p = %d"%p
             print "q = %d"%q
             exit(0)
-    elif argv[1] == '--generate':
-        print randint(2,n)
-    elif argv[1] == '--sqr':
-        t = int(argv[2])
-        print get_t2(t)
-        exit(0)
-    elif argv[1] == '--gcd-crack':
-        t, z = int(argv[2]), int(argv[3])
-        if t == z:
-            print 0
-            exit(1)
-        else:
-            print get_pq(t, z)
-            exit(0)
-    elif argv[1] == '--check-p-q':
-        p = int(argv[2])
-        if p < 2 or n%p != 0 or n == p:
-            print 0
-            exit(1)
-        else:
-            print "CRACKED SUCCESSFULLY!"
-            q = n/p
-            print "p = %d"%p
-            print "q = %d"%q
-            exit(0)
+    else:
+        print_usage(argv[0])
+        exit(1)
+
